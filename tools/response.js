@@ -181,7 +181,7 @@ export function getResponses(client) {
 
     // -----------------------BYE RESPONSE-----------------------
     if (bye.some(phrase => message.content.toLowerCase().includes(phrase))) {
-      message.channel.send(`Bye, ${message.author.username}!`);
+      message.channel.send(`Bye👋, ${message.author.username}!`);
     }
 
     // -----------------------GOOD and BAD RESPONSE-----------------------
