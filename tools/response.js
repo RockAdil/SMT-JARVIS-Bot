@@ -7,7 +7,9 @@ import {
   boss,
   bye,
   goods,
+  goodsReaction,
   bads,
+  badsReaction,
 } from '../module/phrase.js';
 
 // * FUNCTIONS
@@ -15,6 +17,18 @@ const getRandomResponse = (responses, message) => {
   const randomResponse =
     responses[Math.floor(Math.random() * responses.length)];
   message.channel.send(randomResponse);
+};
+
+const getGoodsRandomReaction = (goodsReaction, message) => {
+  const randomGoodsReaction =
+    goodsReaction[Math.floor(Math.random() * goodsReaction.length)];
+  message.react(randomGoodsReaction);
+};
+
+const getBadsRandomReaction = (badsReaction, message) => {
+  const randomBadsReaction =
+    badsReaction[Math.floor(Math.random() * badsReaction.length)];
+  message.react(randomBadsReaction);
 };
 
 // ------------------------------- Response Program ---------------------------
@@ -33,7 +47,7 @@ export function getResponses(client) {
     // ------------------- HINDI HATE RESPONSE --------------------------
     if (
       hindiHateResponse.some(phrase =>
-        message.content.toLowerCase().includes(phrase)
+        new RegExp(`\\b${phrase}\\b`).test(message.content.toLowerCase())
       )
     ) {
       const responses = [
@@ -63,15 +77,14 @@ export function getResponses(client) {
 
     // ------------------- TAGS LEAKED RESPONSE --------------------------
     if (
-      message.content.toLowerCase().includes('tags') ||
+      /!\w+/.test(message.content) ||
       message.content.toLowerCase().includes('tag') ||
-      /!\w+/.test(message.content)
+      message.content.toLowerCase().includes('tags')
     ) {
       const responses = [
         `Whoever talks about tags here is gay! <@${message.author.id}>`,
         `Tags are not allowed here. <@${message.author.id}>`,
         `Don't talk about tags here. <@${message.author.id}>`,
-        `Avoid Talking about tags, Read the #rules no. 6 <@${message.author.id}>`,
       ];
       getRandomResponse(responses, message);
     }
@@ -91,31 +104,31 @@ export function getResponses(client) {
     }
 
     // -----------------------GREETINGS RESPONSE-----------------------
-    const userId = message.author.id; // Get the user's ID
-    const currentTime = Date.now(); // Get the current time
+    // const userId = message.author.id; // Get the user's ID
+    // const currentTime = Date.now(); // Get the current time
 
-    const mentionedBot = message.mentions.has(client.user);
+    // const mentionedBot = message.mentions.has(client.user);
 
-    if (greetings.includes(message.content.toLowerCase()) || mentionedBot) {
-      const lastGreetingTime = greetingCooldowns.get(userId);
+    // if (greetings.includes(message.content.toLowerCase()) || mentionedBot) {
+    //   const lastGreetingTime = greetingCooldowns.get(userId);
 
-      if (
-        !lastGreetingTime ||
-        currentTime - lastGreetingTime >= greetingCooldownTime
-      ) {
-        const responses = [
-          `Hello! <@${message.author.id}>`,
-          `Hi! <@${message.author.id}>`,
-          `Hey! <@${message.author.id}>`,
-          `Yo! <@${message.author.id}>`,
-          `What's up! <@${message.author.id}>`,
-          `Hey there! <@${message.author.id}>`,
-          `What's up! <@${message.author.id}>`,
-        ];
-        getRandomResponse(responses, message);
-        greetingCooldowns.set(userId, currentTime);
-      }
-    }
+    //   if (
+    //     !lastGreetingTime ||
+    //     currentTime - lastGreetingTime >= greetingCooldownTime
+    //   ) {
+    //     const responses = [
+    //       `Hello! <@${message.author.id}>`,
+    //       `Hi! <@${message.author.id}>`,
+    //       `Hey! <@${message.author.id}>`,
+    //       `Yo! <@${message.author.id}>`,
+    //       `What's up! <@${message.author.id}>`,
+    //       `Hey there! <@${message.author.id}>`,
+    //       `What's up! <@${message.author.id}>`,
+    //     ];
+    //     getRandomResponse(responses, message);
+    //     greetingCooldowns.set(userId, currentTime);
+    //   }
+    // }
 
     // -----------------------DAY GREETINGS RESPONSE-----------------------
     const responses = {
@@ -134,27 +147,27 @@ export function getResponses(client) {
     }
 
     // -----------------------HOW ARE YOU RESPONSE-----------------------
-    if (
-      howAreYouResponses.some(phrase =>
-        message.content.toLowerCase().includes(phrase)
-      )
-    ) {
-      message.channel.send(
-        `I'm doing great!😀 How about you, <@${message.author.id}>? I hope you asked me else ignore.`
-      );
-    }
+    // if (
+    //   howAreYouResponses.some(phrase =>
+    //     message.content.toLowerCase().includes(phrase)
+    //   )
+    // ) {
+    //   message.channel.send(
+    //     `I'm doing great!😀 How about you, <@${message.author.id}>? I hope you asked me else ignore.`
+    //   );
+    // }
 
     // -----------------------BOSS RESPONSE-----------------------
-    if (boss.some(phrase => message.content.toLowerCase() === phrase)) {
-      const ownerID = '888712652409409546';
-      const responses = [
-        `My boss is <@${ownerID}> 😎!`,
-        `I belong to <@${ownerID}>!`,
-        `I was created by <@${ownerID}> 😊!`,
-        `I was made by <@${ownerID}> 😁!`,
-      ];
-      getRandomResponse(responses, message);
-    }
+    // if (boss.some(phrase => message.content.toLowerCase() === phrase)) {
+    //   const ownerID = '888712652409409546';
+    //   const responses = [
+    //     `My boss is <@${ownerID}> 😎!`,
+    //     `I belong to <@${ownerID}>!`,
+    //     `I was created by <@${ownerID}> 😊!`,
+    //     `I was made by <@${ownerID}> 😁!`,
+    //   ];
+    //   getRandomResponse(responses, message);
+    // }
 
     // -----------------------BOSS CALL-----------------------
     const ownerID = '888712652409409546';
@@ -172,7 +185,7 @@ export function getResponses(client) {
         currentTime - lastBossResponseTime >= bossCooldownTime
       ) {
         message.channel.send(
-          `<@${ownerID}> Seems someone is calling you! or talking about you.`
+          `<@${ownerID}> Seems someone is talking about you! or calling you. 🧐`
         );
 
         bossCooldowns.set(userId, currentTime);
@@ -180,25 +193,25 @@ export function getResponses(client) {
     }
 
     // -----------------------BYE RESPONSE-----------------------
-    if (bye.some(phrase => message.content.toLowerCase().includes(phrase))) {
-      message.channel.send(`Bye👋, ${message.author.username}!`);
-    }
+    // if (bye.some(phrase => message.content.toLowerCase().includes(phrase))) {
+    //   message.channel.send(`Bye👋, ${message.author.username}!`);
+    // }
 
     // -----------------------GOOD and BAD RESPONSE-----------------------
     const content = message.content.toLowerCase().trim();
 
     if (goods.includes(message.content.toLowerCase())) {
-      message.react('👍');
+      getGoodsRandomReaction(goodsReaction, message);
     }
 
     if (content === 'good bot') {
-      message.react('🥰');
+      getGoodsRandomReaction(goodsReaction, message);
     } else if (content === 'bad bot') {
-      message.react('🥹');
+      getBadsRandomReaction(badsReaction, message);
     }
 
     if (bads.includes(message.content.toLowerCase())) {
-      message.react('👎');
+      getBadsRandomReaction(badsReaction, message);
     }
   });
 
