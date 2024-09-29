@@ -63,7 +63,7 @@ async function checkScores() {
 
       if (
         scoreFound &&
-        score >= 60000 &&
+        score >= 50000 &&
         targetNames.some(name => {
           const spacedName = name.split('').join('\\s*');
           return new RegExp(`\\b${spacedName}(?!\\s*[a-zA-Z])`, 'i').test(
@@ -92,12 +92,12 @@ async function sendAlert(serverIP, player, score) {
 
     if (player.toLowerCase().includes('smt')) {
       await channel.send(
-        `Help the player!\n\nThe player "**${player}**" has scored over "**${score}**" on server "**${serverIP}**"! \n
+        `🟢 Help the player! 🟢\n\nThe player "**${player}**" has scored over "**${score}**" on server "**${serverIP}**"! \n
   || @everyone ||`
       );
     } else {
       await channel.send(
-        `Kill the player!\n\nThe player called "**${player}**" has scored over "**${score}**"! on this server "**${serverIP}**"\n 
+        `🔴 Kill the player! 🔴\n\nThe player called "**${player}**" has scored over "**${score}**"! on this server "**${serverIP}**"\n 
   || @everyone ||`
       );
     }
