@@ -45,35 +45,35 @@ export function getResponses(client) {
     if (message.author.bot) return;
 
     // ------------------- HINDI HATE RESPONSE --------------------------
-    if (
-      hindiHateResponse.some(phrase =>
-        new RegExp(`\\b${phrase}\\b`).test(message.content.toLowerCase())
-      )
-    ) {
-      const responses = [
-        `Hey <@${message.author.id}>!, Can you please speak in English?`,
-        `Sorry <@${message.author.id}>, I don't understand Hindi.`,
-        `Speak English Please 🙏😁, <@${message.author.id}>.`,
-        `I can only respond to English messages, <@${message.author.id}>.`,
-        `Let's keep the conversation in English, <@${message.author.id}>.`,
-        `I know only little bit of Hindi, <@${message.author.id}>. Please use English.`,
-        `If you talk in Hindi then you are gay, <@${message.author.id}>.`,
-        `Whoevers speaks in Hindi is gay, Including you <@${message.author.id}>.`,
-        `Nood <@${message.author.id}>, I don't understand Hindi.`,
-      ];
-      getRandomResponse(responses, message);
-    }
+    // if (
+    //   hindiHateResponse.some(phrase =>
+    //     new RegExp(`\\b${phrase}\\b`).test(message.content.toLowerCase())
+    //   )
+    // ) {
+    //   const responses = [
+    //     `Hey <@${message.author.id}>!, Can you please speak in English?`,
+    //     `Sorry <@${message.author.id}>, I don't understand Hindi.`,
+    //     `Speak English Please 🙏😁, <@${message.author.id}>.`,
+    //     `I can only respond to English messages, <@${message.author.id}>.`,
+    //     `Let's keep the conversation in English, <@${message.author.id}>.`,
+    //     `I know only little bit of Hindi, <@${message.author.id}>. Please use English.`,
+    //     `If you talk in Hindi then you are gay, <@${message.author.id}>.`,
+    //     `Whoevers speaks in Hindi is gay, Including you <@${message.author.id}>.`,
+    //     `Nood <@${message.author.id}>, I don't understand Hindi.`,
+    //   ];
+    //   getRandomResponse(responses, message);
+    // }
 
     // ------------------- GAY RESPONSE --------------------------
-    if (message.content.toLowerCase().includes('gay')) {
-      const responses = [
-        `No, you are the gay one, <@${message.author.id}>.`,
-        `Don’t worry, you are too ugly to kiss. <@${message.author.id}>.`,
-        `Here is the gay community for you 🏳️‍🌈, <@${message.author.id}>.`,
-        `Oh my God, how do you tell?? Usually only gays who can identify other gays. <@${message.author.id}> 🏳️‍🌈.`,
-      ];
-      getRandomResponse(responses, message);
-    }
+    // if (message.content.toLowerCase().includes('gay')) {
+    //   const responses = [
+    //     `No, you are the gay one, <@${message.author.id}>.`,
+    //     `Don’t worry, you are too ugly to kiss. <@${message.author.id}>.`,
+    //     `Here is the gay community for you 🏳️‍🌈, <@${message.author.id}>.`,
+    //     `Oh my God, how do you tell?? Usually only gays who can identify other gays. <@${message.author.id}> 🏳️‍🌈.`,
+    //   ];
+    //   getRandomResponse(responses, message);
+    // }
 
     // ------------------- TAGS LEAKED RESPONSE --------------------------
     if (
@@ -130,20 +130,20 @@ export function getResponses(client) {
     // }
 
     // -----------------------DAY GREETINGS RESPONSE-----------------------
-    const responses = {
-      'good morning': `Good Morning! <@${message.author.id}>  🌞`,
-      'good afternoon': `Good Afternoon! <@${message.author.id}>`,
-      'good evening': `Good Evening! <@${message.author.id}>`,
-      'good night': `Good Night! <@${message.author.id}> 🌙`,
-    };
+    // const responses = {
+    //   'good morning': `Good Morning! <@${message.author.id}>  🌞`,
+    //   'good afternoon': `Good Afternoon! <@${message.author.id}>`,
+    //   'good evening': `Good Evening! <@${message.author.id}>`,
+    //   'good night': `Good Night! <@${message.author.id}> 🌙`,
+    // };
 
-    const userMessage = message.content.toLowerCase();
+    // const userMessage = message.content.toLowerCase();
 
-    const greeting = dayGreetings.find(phrase => userMessage.includes(phrase));
+    // const greeting = dayGreetings.find(phrase => userMessage.includes(phrase));
 
-    if (greeting) {
-      message.channel.send(responses[greeting]);
-    }
+    // if (greeting) {
+    //   message.channel.send(responses[greeting]);
+    // }
 
     // -----------------------HOW ARE YOU RESPONSE-----------------------
     // if (
@@ -169,27 +169,27 @@ export function getResponses(client) {
     // }
 
     // -----------------------BOSS CALL-----------------------
-    const ownerID = '888712652409409546';
-    if (
-      message.content.toLowerCase().includes(`<@${ownerID}>`) ||
-      message.content.toLowerCase().includes(`<@!${ownerID}>`) ||
-      message.content.toLowerCase().includes(`adil`) ||
-      message.content.toLowerCase().includes(`rock adil`) ||
-      message.content.toLowerCase().includes(`adil ahamed`)
-    ) {
-      const lastBossResponseTime = bossCooldowns.get(userId);
+    // const ownerID = '888712652409409546';
+    // if (
+    //   message.content.toLowerCase().includes(`<@${ownerID}>`) ||
+    //   message.content.toLowerCase().includes(`<@!${ownerID}>`) ||
+    //   message.content.toLowerCase().includes(`adil`) ||
+    //   message.content.toLowerCase().includes(`rock adil`) ||
+    //   message.content.toLowerCase().includes(`adil ahamed`)
+    // ) {
+    //   const lastBossResponseTime = bossCooldowns.get(userId);
 
-      if (
-        !lastBossResponseTime ||
-        currentTime - lastBossResponseTime >= bossCooldownTime
-      ) {
-        message.channel.send(
-          `<@${ownerID}> Seems someone is talking about you! or calling you. 🧐`
-        );
+    //   if (
+    //     !lastBossResponseTime ||
+    //     currentTime - lastBossResponseTime >= bossCooldownTime
+    //   ) {
+    //     message.channel.send(
+    //       `<@${ownerID}> Seems someone is talking about you! or calling you. 🧐`
+    //     );
 
-        bossCooldowns.set(userId, currentTime);
-      }
-    }
+    //     bossCooldowns.set(userId, currentTime);
+    //   }
+    // }
 
     // -----------------------BYE RESPONSE-----------------------
     // if (bye.some(phrase => message.content.toLowerCase().includes(phrase))) {
