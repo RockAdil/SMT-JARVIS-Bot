@@ -77,7 +77,6 @@ export function getResponses(client) {
 
     // ------------------- TAGS LEAKED RESPONSE --------------------------
     if (
-      /!\w+/.test(message.content) ||
       message.content.toLowerCase().includes('tag') ||
       message.content.toLowerCase().includes('tags')
     ) {

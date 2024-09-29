@@ -14,7 +14,7 @@ const client = new Client({
   ],
 });
 
-const CHANNEL_ID = '1288552303489581248';
+const CHANNEL_ID = '753212000829702176';
 const SERVER_IP = '15.235.218.24:444 - SG, AS';
 let isPaused = false;
 
@@ -25,7 +25,7 @@ client.once('ready', () => {
     if (!isPaused) {
       checkScores();
     }
-  }, 120000); //2 mins
+  }, 120000); //2min
 });
 
 async function checkScores() {
@@ -57,6 +57,7 @@ async function checkScores() {
         if (score) {
           serverFound = false;
           scoreFound = true;
+          console.log(player, score, serverIP);
         }
       }
 
@@ -81,26 +82,34 @@ async function checkScores() {
 }
 
 async function sendAlert(serverIP, player, score) {
-  const channel = await client.channels.fetch(CHANNEL_ID);
+  try {
+    const channel = await client.channels.fetch(CHANNEL_ID);
 
-  if (player.toLowerCase().includes('smt')) {
-    channel.send(
-      `Help the player!
-       
-      The player "**${player}**" has scored over "**${score}**" on server "**${serverIP}**"!`
-    );
-  } else {
-    channel.send(
-      `Kill the player!
+    if (!channel) {
+      console.error(`Channel with ID ${CHANNEL_ID} not found`);
+      return;
+    }
 
-      The player called "**${player}**" has scored over "**${score}**"! on this server "**${serverIP}**"`
-    );
+    if (player.toLowerCase().includes('smt')) {
+      await channel.send(
+        `Help the player!\n\nThe player "**${player}**" has scored over "**${score}**" on server "**${serverIP}**"! \n
+  || @everyone ||`
+      );
+    } else {
+      await channel.send(
+        `Kill the player!\n\nThe player called "**${player}**" has scored over "**${score}**"! on this server "**${serverIP}**"\n 
+  || @everyone ||`
+      );
+    }
+
+    console.log(`Alert sent for player ${player} with score ${score}`);
+    isPaused = true;
+    setTimeout(() => {
+      isPaused = false;
+    }, 3600000); //1hr
+  } catch (error) {
+    console.error('Error sending alert:', error);
   }
-
-  isPaused = true;
-  setTimeout(() => {
-    isPaused = false;
-  }, 1197000);
 }
 
 getResponses(client);
