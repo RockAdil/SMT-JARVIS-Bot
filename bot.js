@@ -106,7 +106,7 @@ async function sendAlert(serverIP, player, score) {
     isPaused = true;
     setTimeout(() => {
       isPaused = false;
-    }, 3600000); //1hr
+    }, 1800000); //30 mins
   } catch (error) {
     console.error('Error sending alert:', error);
   }
