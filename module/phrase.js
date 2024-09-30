@@ -49,6 +49,7 @@ export const hindiHateResponse = [
   'main hue',
   'main hui',
   'main huye',
+  'tum',
   'tum ho',
   'tum hua',
   'tum hue',
@@ -59,10 +60,12 @@ export const hindiHateResponse = [
   'tu hue',
   'tu hui',
   'tu huye',
+  'hum',
   'hum hain',
   'hum hue',
   'hum hui',
   'hum huye',
+  'aap',
   'aap hain',
   'aap hue',
   'aap hui',
@@ -73,6 +76,7 @@ export const hindiHateResponse = [
   'vah hue',
   'vah hui',
   'vah huye',
+  've',
   've hain',
   've hue',
   've hui',
@@ -142,58 +146,6 @@ export const badwords = [
   'fuck',
   'fk',
 ];
-
-export const greetings = [
-  'hello',
-  'hi',
-  'hii',
-  'hey',
-  'hy',
-  'hui',
-  'huii',
-  'yo',
-  'yoo',
-  'sup',
-  "what's up",
-];
-
-export const dayGreetings = [
-  'good morning',
-  'good afternoon',
-  'good evening',
-  'good night',
-];
-
-export const howAreYouResponses = [
-  'how are you',
-  'how r u',
-  'how are u',
-  'how are you doing',
-  'how are you feeling',
-  'how are you today',
-  'how are you feeling today',
-];
-
-export const boss = [
-  'who is your boss',
-  'who is your boss?',
-  'who is ur boss',
-  'who is ur boss?',
-  `who's your boss`,
-  `who's your boss?`,
-  `who's ur boss`,
-  `who's ur boss?`,
-  `who is your owner`,
-  `who is your owner?`,
-  `who is ur owner`,
-  `who is ur owner?`,
-  `who's your owner`,
-  `who's your owner?`,
-  `who created you`,
-  'who created you?',
-];
-
-export const bye = ['bye', 'goodbye', 'good bye', 'see you', 'see you later'];
 
 export const goods = [
   'ok',
