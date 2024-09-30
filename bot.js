@@ -90,15 +90,16 @@ async function sendAlert(serverIP, player, score) {
       return;
     }
 
+    const link = 'https://ntl-slither.com/ss/?reg=as';
+
     if (player.toLowerCase().includes('smt')) {
       await channel.send(
-        `🟢 Help the player! 🟢\n\nThe player "**${player}**" has scored over "**${score}**" on server "**${serverIP}**"! \n
-  || @everyone ||`
+        `🟢 Help the player! 🟢\n\nThe player "**${player}**" has scored over "**${score}**" on server "**${serverIP}**"! \n\n
+        || @everyone || [NTL Leaderboard Link](${link})`
       );
     } else {
       await channel.send(
-        `🔴 Kill the player! 🔴\n\nThe player called "**${player}**" has scored over "**${score}**"! on this server "**${serverIP}**"\n 
-  || @everyone ||`
+        `🔴 Kill the player! 🔴\n\nThe player called "**${player}**" has scored over "**${score}**" on this server "**${serverIP}**"\n\n|| @everyone || [NTL Leaderboard Link](${link})`
       );
     }
 
