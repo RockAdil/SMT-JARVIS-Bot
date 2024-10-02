@@ -1,5 +1,5 @@
 import {
-  hindiHateResponse,
+  notEnglishHateResponse,
   badwords,
   goods,
   goodsReaction,
@@ -26,7 +26,7 @@ let getTimeoutMember = async (message, mins, reason) => {
     try {
       await member.timeout(mins * 60 * 1000);
       message.channel.send(
-        `<@${message.author.id}> has been timed out for ${mins} minutes for using ${reason}.`
+        `<@${message.author.id}> has been timed out for ${mins} minutes because of ${reason}.`
       );
     } catch (error) {
       console.error('Failed to timeout the user:', error);
@@ -45,11 +45,13 @@ export function getResponses(client) {
 
     // ------------------- HINDI HATE RESPONSE --------------------------
     if (
-      hindiHateResponse.some(phrase =>
-        new RegExp(`\\b${phrase}\\b`).test(message.content.toLowerCase())
+      notEnglishHateResponse.some(phrase =>
+        new RegExp(`(^|\\s)${phrase.toLowerCase()}(\\s|$)`, 'gi').test(
+          message.content.toLowerCase()
+        )
       )
     ) {
-      getTimeoutMember(message, 2, 'Hindi'); // Timeout for 2 minute
+      getTimeoutMember(message, 2, `**Don't speak English**`); // Timeout for 2 minute
     }
 
     // ------------------- GAY RESPONSE --------------------------
@@ -58,8 +60,9 @@ export function getResponses(client) {
     }
 
     // ------------------- TAGS LEAKED RESPONSE --------------------------
-    if (new RegExp(`\\b(tags?)\\b`, 'i').test(message.content)) {
-      getTimeoutMember(message, 1, 'Tags'); // Timeout for 1 minute
+    if (new RegExp(/!\w+/, 'i').test(message.content)) {
+      getTimeoutMember(message, 1, '**Sharing Tag**'); // Timeout for 1 minute
+      message.delete();
     }
 
     // ------------------- BAD WORDS RESPONSE --------------------------
@@ -70,7 +73,8 @@ export function getResponses(client) {
         )
       )
     ) {
-      getTimeoutMember(message, 2, 'Bad Word'); // Timeout for 2 minute
+      getTimeoutMember(message, 2, 'using Bad Word'); // Timeout for 2 minute
+      message.delete();
     }
 
     // -----------------------BOSS CALL-----------------------
