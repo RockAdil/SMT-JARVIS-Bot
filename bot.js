@@ -25,7 +25,7 @@ client.once('ready', () => {
     if (!isPaused) {
       checkScores();
     }
-  }, 120000); //2min
+  }, 600000); //10min
 });
 
 async function checkScores() {
@@ -107,7 +107,7 @@ async function sendAlert(serverIP, player, score) {
     isPaused = true;
     setTimeout(() => {
       isPaused = false;
-    }, 1800000); //30 mins
+    }, 1680000); //28 mins
   } catch (error) {
     console.error('Error sending alert:', error);
   }
