@@ -35,13 +35,16 @@ async function checkScores() {
 
     let serverFound = false;
     let scoreFound = false;
-    let result = false;
 
     let serverIP = '';
     let score = '';
     let player = '';
 
     const targetNames = ['smt', 'dino', 'fsg', 'rekt', 'vn', 'tos'];
+
+    let matchFound = false;
+    let matchFound2 = false;
+    let matchFound3 = false;
 
     $('tr').each((i, el) => {
       if ($(el).find('th').text().trim() === SERVER_IP) {
@@ -58,21 +61,35 @@ async function checkScores() {
           serverFound = false;
           scoreFound = true;
           console.log(player, score, serverIP);
+
+          const extractedStrings =
+            player
+              .match(/\[([^\]]+)\]/g)
+              ?.map(str => str.slice(1, -1).replace(/\s+/g, '')) || [];
+          matchFound = extractedStrings.some(extracted =>
+            targetNames.some(
+              name => name.toLowerCase() === extracted.toLowerCase()
+            )
+          );
+
+          const words = player.split(/\s+/);
+          matchFound2 = words.some(word =>
+            targetNames.some(name => name.toLowerCase() === word.toLowerCase())
+          );
+
+          const modifiedPlayer = player.replace(/\s+/g, '');
+          matchFound3 = targetNames.some(
+            name => name.toLowerCase() === modifiedPlayer.toLowerCase()
+          );
         }
       }
 
       if (
         scoreFound &&
         score >= 50000 &&
-        targetNames.some(name => {
-          const spacedName = name.split('').join('\\s*');
-          return new RegExp(`\\b${spacedName}(?!\\s*[a-zA-Z])`, 'i').test(
-            player
-          );
-        })
+        (matchFound || matchFound2 || matchFound3)
       ) {
         scoreFound = false;
-        result = true;
         sendAlert(serverIP, player, score);
       }
     });
