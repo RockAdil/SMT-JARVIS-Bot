@@ -40,7 +40,16 @@ async function checkScores() {
     let score = '';
     let player = '';
 
-    const targetNames = ['smt', 'dino', 'fsg', 'rekt', 'vn', 'tos'];
+    const targetNames = [
+      'smt',
+      'dino',
+      'fsg',
+      'rekt',
+      'vn',
+      'tos',
+      '@live',
+      'live',
+    ];
 
     let matchFound = false;
     let matchFound2 = false;
