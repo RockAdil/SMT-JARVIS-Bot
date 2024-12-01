@@ -15,7 +15,8 @@ const client = new Client({
 });
 
 const CHANNEL_ID = '1289958028560568411';
-const SERVER_IP = '15.235.218.24:444 - SG, AS';
+// const SERVER_IP = '15.235.218.24:444 - SG, AS';
+const SERVER_IP = '15.235.218.24:444';
 let isPaused = false;
 
 client.once('ready', () => {
@@ -56,12 +57,14 @@ async function checkScores() {
     let matchFound3 = false;
 
     $('tr').each((i, el) => {
-      if ($(el).find('th').text().trim() === SERVER_IP) {
-        serverIP = $(el).find('th').text().trim();
+      if (
+        $(el).find("span[style='user-select: all']").text().trim() === SERVER_IP
+      ) {
+        // serverIP = $(el).find('th').text().trim();
+        serverIP = $(el).find("span[style='user-select: all']").text().trim();
 
         serverFound = true;
       }
-
       if (serverFound) {
         player = $(el).find('.tdnick').text().trim();
         score = parseInt($(el).find('.tdscore').text().trim());
