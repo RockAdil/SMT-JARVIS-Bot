@@ -14,7 +14,7 @@ const client = new Client({
   ],
 });
 
-const CHANNEL_ID = '1289958028560568411';
+const CHANNEL_ID = '1367390036060016680';
 // const SERVER_IP = '15.235.218.24:444 - SG, AS';
 const SERVER_IP = '15.235.218.24:444';
 let isPaused = false;
